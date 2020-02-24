@@ -27,10 +27,10 @@ const char* getVertexShaderSource()
         "layout (location = 1) in vec3 aColor;"
         ""
         "uniform mat4 worldMatrix;"
-        "uniform mat4 viewMatrix = mat4(1.0);"  
-        "uniform mat4 projectionMatrix = mat4(1.0);" //passed vec4 instead because  theres no good reason to convert later 
+        "uniform mat4 viewMatrix;"  
+        "uniform mat4 projectionMatrix;"  
         ""
-        "out vec4 vertexColor;"
+        "out vec4 vertexColor;"//passed vec4 instead because  theres no good reason to convert later
         "void main()"
         "{"
         "   vertexColor = vec4(aColor, 1.0f);"
@@ -134,7 +134,7 @@ void buildGrid(GLuint worldMatrixLocation)
 
 void olafBody(GLuint worldMatrixLocation, GLenum renderMode, float transFloat, mat3 scaleMat, float xFloat, float zFloat)
 {
-    mat4 olafBotBody = translate(mat4(1.0f), scaleMat * vec3(0.0f + transFloat + xFloat, 1.0f, 0.0f+ transFloat + zFloat)) * scale(mat4(1.0f), scaleMat * vec3(1.0f, 1.0f,  1.0f));
+    mat4 olafBotBody = translate(mat4(1.0f), scaleMat * vec3(0.0f + transFloat + xFloat, 1.0f, 0.0f + transFloat + zFloat)) * scale(mat4(1.0f), scaleMat * vec3(1.0f, 1.0f, 1.0f));
     glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &olafBotBody[0][0]);
     glDrawArrays(renderMode, 0, 36);
 
@@ -634,7 +634,7 @@ int main(int argc, char* argv[])
     glUseProgram(shaderProgram);
     
 
-    // Camera parameters for view transform
+    // Camera parameters 
     vec3 cameraPosition(15.0f, 15.0f, 10.0f);
     vec3 cameraLookAt(0.0f, -1.0f, 0.0f);
     vec3 cameraUp(0.0f, 1.0f, 0.0f);
@@ -670,16 +670,15 @@ int main(int argc, char* argv[])
 
 
 
-    //variables here are to be used with the inputs 
-    float transFloat = 1; 
+    //variables here are the defaults to be used with the inputs, also will be the revert 
+    float transFloat = 0; 
     bool olafBool = true;
     float scaleFloat  = 1.0;
     float xFloat = 0;
     float zFloat = 0; 
-    //mat used for scaling
-        
-   
     GLenum renderMode = GL_TRIANGLES;
+        
+    
 
     
     glBindVertexArray(vao);
@@ -693,13 +692,15 @@ int main(int argc, char* argv[])
         lastFrameTime += dt;
 
 
-        mat3 scaleMat = mat3(scaleFloat, 0, 0,
+        //mat used for scaling
+        mat3 scaleMat = mat3(            scaleFloat, 0, 0,
                                          0, scaleFloat, 0 ,
                                          0, 0 , scaleFloat);
         
         glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
         mat4 viewMatrix = lookAt(cameraPosition, cameraLookAt, cameraUp);
+        GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
 
         glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT);
         
@@ -707,10 +708,12 @@ int main(int argc, char* argv[])
         GLuint worldMatrixLocation = glGetUniformLocation(shaderProgram, "worldMatrix");
 
         
-        if (scaleFloat < .1)
-            scaleFloat = .1;
-
         
+
+        float theta = radians(cameraHorizontalAngle);
+        float phi = radians(cameraVerticalAngle);
+
+        cameraLookAt = vec3(cosf(phi) * cosf(theta), sinf(phi), -cosf(phi) * sinf(theta));
         //draw gridlines
         buildGrid(worldMatrixLocation);
        
@@ -730,17 +733,18 @@ int main(int argc, char* argv[])
        
         
         //draw z axis 
-        mat4 zAxisWorldMatrix = translate(mat4(1.0f), vec3 (0.0f, 0.0f, 2.5f)) * scale(mat4(1.0f), vec3(0.0f, 0.0f, 5.0f));
+        mat4 zAxisWorldMatrix = translate(mat4(1.0f), vec3 (0.0f, 0.0f, -2.5f)) * scale(mat4(1.0f), vec3(0.0f, 0.0f, 5.0f));
         glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &zAxisWorldMatrix[0][0]);
         glDrawArrays(GL_LINES, 108, 36);
        
-        //test body draw 
+        //first body draw 
         if (olafBool) {
             doYouWantToBuildASnowman(worldMatrixLocation, renderMode, transFloat, scaleMat, xFloat, zFloat);
             
         }
-        
-        
+        //controls olaf from getting too itty bitty 
+        if (scaleFloat < .1)
+            scaleFloat = .1;
 
         //key inputs will go heyyaaaaaahhh
         if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
@@ -789,6 +793,8 @@ int main(int argc, char* argv[])
         
         }
 
+
+
         //move olaf up
         if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) 
         {
@@ -807,26 +813,27 @@ int main(int argc, char* argv[])
 
 
         //rotates anti clockwise about positive x axis 
-        if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_RELEASE) 
+        if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) 
         {
-
+            
+            cameraHorizontalAngle = theta+ radians(5.0f);
         }
 
         //rotates anticlockwise about negative x axis 
-        if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_RELEASE) 
+        if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) 
         {
 
         }
 
         //rotates anti clockwise about positive y axis 
-        if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_RELEASE) 
+        if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) 
         {
 
 
         }
 
         //rotates anti clockwise about negative y axis
-        if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_RELEASE) 
+        if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) 
         {
 
         }
@@ -890,20 +897,31 @@ int main(int argc, char* argv[])
             
         }
 
+        //added a reset function because why would you want to lose poor olaf
+        if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS)
+        {
+            olafBool = false;
+            transFloat = 0;
+            olafBool = true;
+            scaleFloat = 1.0;
+            xFloat = 0;
+            zFloat = 0;
+            renderMode = GL_TRIANGLES;
+            olafBool = true;
+        }
 
+        //float theta = radians(cameraHorizontalAngle);
+        //float phi = radians(cameraVerticalAngle);
 
-        float theta = radians(cameraHorizontalAngle);
-        float phi = radians(cameraVerticalAngle);
-
-        cameraLookAt = vec3(cosf(phi) * cosf(theta), sinf(phi), -cosf(phi) * sinf(theta));
-        vec3 cameraSideVector = glm::cross(cameraLookAt, vec3(0.0f, 1.0f, 0.0f));
+        
+        //vec3 cameraSideVector = glm::cross(cameraLookAt, vec3(0.0f, 1.0f, 0.0f));
 
        // glm::normalize(cameraSideVector);
 
         // Set the view matrix 
         viewMatrix = lookAt(cameraPosition, cameraPosition + cameraLookAt, cameraUp);
 
-        GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
+        
         glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
 
        // End Frame
