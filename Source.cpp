@@ -3,12 +3,11 @@
 #include <iostream>
 #include <list>
 #include <algorithm>
+#include <cstdlib>
 
 #define GLEW_STATIC 1   
 #include <GL/glew.h>    
-
 #include <GLFW/glfw3.h> 
-
 #include "glm/glm.hpp"  
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/common.hpp>
@@ -133,80 +132,80 @@ void buildGrid(GLuint worldMatrixLocation)
 }
 
 
-void olafBody(GLuint worldMatrixLocation, GLenum renderMode) 
+void olafBody(GLuint worldMatrixLocation, GLenum renderMode, float transFloat, mat3 scaleMat, float xFloat, float zFloat)
 {
-    mat4 olafBotBody = translate(mat4(1.0f), vec3(0.0f, 1.0f, 0.0f));
+    mat4 olafBotBody = translate(mat4(1.0f), scaleMat * vec3(0.0f + transFloat + xFloat, 1.0f, 0.0f+ transFloat + zFloat)) * scale(mat4(1.0f), scaleMat * vec3(1.0f, 1.0f,  1.0f));
     glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &olafBotBody[0][0]);
     glDrawArrays(renderMode, 0, 36);
 
-    mat4 olafTopBody = translate(mat4(1.0f), vec3(0.0f, 1.75f, 0.0f)) * scale(mat4(1.0f), vec3(0.75f, 0.75f, .75));
+    mat4 olafTopBody = translate(mat4(1.0f), scaleMat * vec3(0.0f + transFloat + xFloat, 1.75f, 0.0f + transFloat + zFloat)) * scale(mat4(1.0f), scaleMat * vec3(0.75f, 0.75f, .75));
     glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &olafTopBody[0][0]);
     glDrawArrays(renderMode, 0, 36);
 
 }
 
-void olafHead(GLuint worldMatrixLocation, GLenum renderMode)
+void olafHead(GLuint worldMatrixLocation, GLenum renderMode, float transFloat, mat3 scaleMat, float xFloat, float zFloat)
 {
-    mat4 olafHead = translate(mat4(1.0f), vec3(0.0f, 2.3f, 0.0f)) * scale(mat4(1.0f), vec3(0.5f, 0.5f, .5f));
+    mat4 olafHead = translate(mat4(1.0f), scaleMat * vec3(0.0f + transFloat + xFloat, 2.3f, 0.0f + transFloat + zFloat)) * scale(mat4(1.0f), scaleMat * vec3(0.5f, 0.5f, .5f));
     glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &olafHead[0][0]);
     glDrawArrays(renderMode, 0, 36);
 }
 
-void olafNose(GLuint worldMatrixLocation, GLenum renderMode)
+void olafNose(GLuint worldMatrixLocation, GLenum renderMode, float transFloat, mat3 scaleMat, float xFloat, float zFloat)
 {
-    mat4 olafNose = translate(mat4(1.0f), vec3(0.25f, 2.25f, 0.0f)) * scale(mat4(1.0f), vec3(0.1f, 0.1f, 0.1f));
+    mat4 olafNose = translate(mat4(1.0f), scaleMat * vec3(0.25f + transFloat + xFloat, 2.25f, 0.0f + transFloat + zFloat)) * scale(mat4(1.0f), scaleMat * vec3(0.1f, 0.1f, 0.1f));
     glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &olafNose[0][0]);
     glDrawArrays(renderMode, 180, 36);
 }
 
-void olafHand(GLuint worldMatrixLocation, GLenum renderMode)
+void olafHand(GLuint worldMatrixLocation, GLenum renderMode, float transFloat, mat3 scaleMat, float xFloat, float zFloat)
 {
-    mat4 olafHand = translate(mat4(1.0f), vec3(0.0f, 2.0f, 0.0f)) * scale(mat4(1.0f), vec3(0.1f, 0.1f, 2.0f));
+    mat4 olafHand = translate(mat4(1.0f), scaleMat * vec3(0.0f + transFloat + xFloat, 2.0f, 0.0f + transFloat + zFloat)) * scale(mat4(1.0f), scaleMat * vec3(0.1f, 0.1f, 2.0f));
     glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &olafHand[0][0]);
     glDrawArrays(renderMode, 0, 36);
 }
 
-void olafRLeg(GLuint worldMatrixLocation, GLenum renderMode)
+void olafRLeg(GLuint worldMatrixLocation, GLenum renderMode, float transFloat, mat3 scaleMat, float xFloat, float zFloat)
 {
-    mat4 olafRLeg = translate(mat4(1.0f), vec3(0.0f, 0.25f, -0.2f)) * scale(mat4(1.0f), vec3(0.15f, .5f, 0.15f));
+    mat4 olafRLeg = translate(mat4(1.0f), scaleMat * vec3(0.0f + transFloat + xFloat, 0.25f, -0.2f + transFloat + zFloat)) * scale(mat4(1.0f), scaleMat * vec3(0.15f, .5f, 0.15f));
     glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &olafRLeg[0][0]);
     glDrawArrays(renderMode, 0, 36);
 }
 
-void olafLLeg(GLuint worldMatrixLocation, GLenum renderMode)
+void olafLLeg(GLuint worldMatrixLocation, GLenum renderMode, float transFloat, mat3 scaleMat, float xFloat, float zFloat)
 {
-    mat4 olafLLeg = translate(mat4(1.0f), vec3(0.0f, 0.25f, 0.2f)) * scale(mat4(1.0f), vec3(0.15f, .5f, 0.15f));
+    mat4 olafLLeg = translate(mat4(1.0f), scaleMat * vec3(0.0f + transFloat + xFloat, 0.25f, 0.2f + transFloat + zFloat)) * scale(mat4(1.0f), scaleMat * vec3(0.15f, .5f, 0.15f));
     glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &olafLLeg[0][0]);
     glDrawArrays(renderMode, 0, 36);
 
 }
 
-void olafREye(GLuint worldMatrixLocation, GLenum renderMode)
+void olafREye(GLuint worldMatrixLocation, GLenum renderMode, float transFloat, mat3 scaleMat, float xFloat, float zFloat)
 {
-    mat4 olafREye = translate(mat4(1.0f), vec3(0.25f, 2.45f, -0.15f)) * scale(mat4(1.0f), vec3(0.1f, 0.1f, 0.1f));
+    mat4 olafREye = translate(mat4(1.0f), scaleMat * vec3(0.25f + transFloat + xFloat, 2.45f, -0.15f + transFloat + zFloat)) * scale(mat4(1.0f), scaleMat * vec3(0.1f, 0.1f, 0.1f));
     glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &olafREye[0][0]);
     glDrawArrays(renderMode, 216, 36);
 }
 
-void olafLEye(GLuint worldMatrixLocation, GLenum renderMode)
+void olafLEye(GLuint worldMatrixLocation, GLenum renderMode, float transFloat, mat3 scaleMat, float xFloat, float zFloat)
 {
-    mat4 olafLEye = translate(mat4(1.0f), vec3(0.25f, 2.45f, 0.15f)) * scale(mat4(1.0f), vec3(0.1f, 0.1f, 0.1f));
+    mat4 olafLEye = translate(mat4(1.0f), scaleMat * vec3(0.25f + transFloat + xFloat, 2.45f, 0.15f + transFloat + zFloat)) * scale(mat4(1.0f), scaleMat * vec3(0.1f, 0.1f, 0.1f));
     glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &olafLEye[0][0]);
     glDrawArrays(renderMode, 216, 36);
 }
 
-void doYouWantToBuildASnowman(GLuint worldMatrixLocation, GLenum renderMode)
+void doYouWantToBuildASnowman(GLuint worldMatrixLocation, GLenum renderMode, float transFloat, mat3 scaleMat, float xFloat, float zFloat)
 {
     //takes all parameters needed for input and passes them to the appropriate struct for each body pary
     //eventually this will build the whole snowman according to what input calls it 
-    olafBody(worldMatrixLocation, renderMode);
-    olafHead(worldMatrixLocation, renderMode);
-    olafNose(worldMatrixLocation, renderMode);
-    olafHand(worldMatrixLocation, renderMode);
-    olafREye(worldMatrixLocation, renderMode);
-    olafLEye(worldMatrixLocation, renderMode);
-    olafRLeg(worldMatrixLocation, renderMode);
-    olafLLeg(worldMatrixLocation, renderMode);
+    olafBody(worldMatrixLocation, renderMode, transFloat, scaleMat, xFloat, zFloat);
+    olafHead(worldMatrixLocation, renderMode, transFloat, scaleMat, xFloat, zFloat);
+    olafNose(worldMatrixLocation, renderMode, transFloat, scaleMat, xFloat, zFloat);
+    olafHand(worldMatrixLocation, renderMode, transFloat, scaleMat, xFloat, zFloat);
+    olafREye(worldMatrixLocation, renderMode, transFloat, scaleMat, xFloat, zFloat);
+    olafLEye(worldMatrixLocation, renderMode, transFloat, scaleMat, xFloat, zFloat);
+    olafRLeg(worldMatrixLocation, renderMode, transFloat, scaleMat, xFloat, zFloat);
+    olafLLeg(worldMatrixLocation, renderMode, transFloat, scaleMat, xFloat, zFloat);
 }
 
 int createVertexBufferObject()
@@ -667,7 +666,18 @@ int main(int argc, char* argv[])
 
     glEnable(GL_CULL_FACE|GL_DEPTH_TEST);
 
+
+
+
+
+    //variables here are to be used with the inputs 
+    float transFloat = 1; 
     bool olafBool = true;
+    float scaleFloat  = 1.0;
+    float xFloat = 0;
+    float zFloat = 0; 
+    //mat used for scaling
+        
    
     GLenum renderMode = GL_TRIANGLES;
 
@@ -682,6 +692,11 @@ int main(int argc, char* argv[])
         float dt = glfwGetTime() - lastFrameTime;
         lastFrameTime += dt;
 
+
+        mat3 scaleMat = mat3(scaleFloat, 0, 0,
+                                         0, scaleFloat, 0 ,
+                                         0, 0 , scaleFloat);
+        
         glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
         mat4 viewMatrix = lookAt(cameraPosition, cameraLookAt, cameraUp);
@@ -692,7 +707,8 @@ int main(int argc, char* argv[])
         GLuint worldMatrixLocation = glGetUniformLocation(shaderProgram, "worldMatrix");
 
         
-       
+        if (scaleFloat < .1)
+            scaleFloat = .1;
 
         
         //draw gridlines
@@ -720,89 +736,119 @@ int main(int argc, char* argv[])
        
         //test body draw 
         if (olafBool) {
-            doYouWantToBuildASnowman(worldMatrixLocation, renderMode);
+            doYouWantToBuildASnowman(worldMatrixLocation, renderMode, transFloat, scaleMat, xFloat, zFloat);
+            
         }
         
-        // End Frame
-        glfwSwapBuffers(window);
-        glfwPollEvents();
+        
 
         //key inputs will go heyyaaaaaahhh
         if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
                     glfwSetWindowShouldClose(window, true);
 
-        //reposition olaf with space
+        //reposition olaf with space, uses random floats to change the matricies 
         if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
         {
-            olafBool = true;
+            olafBool = false;
+            transFloat = -50.0f + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (50.0f - -50.0f)));
+            olafBool = true; 
         }
         
         //scale olaf upwards with U
-        if (glfwGetKey(window, GLFW_KEY_U) == GLFW_RELEASE) {
-
+        if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS) 
+        {
+            olafBool = false;
+            scaleFloat += .11f;
+            olafBool = true; 
         }
 
         //scale olaf downwards with J 
-        if (glfwGetKey(window, GLFW_KEY_J) == GLFW_RELEASE) {
-
+        if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS) 
+        {
+            olafBool = false;
+            scaleFloat -= .11f;
+            olafBool = true;
         }
 
         //move olaf left
-        if (glfwGetKey(window, GLFW_KEY_A) == GLFW_RELEASE) {
-
+        if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) 
+        {
+            olafBool = false;
+            zFloat += .5;
+            olafBool = true;
         }
 
-        //move olaf right
-        if (glfwGetKey(window, GLFW_KEY_D) == GLFW_RELEASE) {
 
+        //move olaf right
+        if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) 
+        {
+            
+            olafBool = false;
+            zFloat -= .5;
+            olafBool = true;
+        
         }
 
         //move olaf up
-        if (glfwGetKey(window, GLFW_KEY_W) == GLFW_RELEASE) {
-
+        if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) 
+        {
+            olafBool = false;
+            xFloat -= .5;
+            olafBool = true;
         }
 
         //move olaf down
-        if (glfwGetKey(window, GLFW_KEY_S) == GLFW_RELEASE) {
-
+        if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) 
+        {
+            olafBool = false;
+            xFloat += .5;
+            olafBool = true;
         }
 
 
         //rotates anti clockwise about positive x axis 
-        if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_RELEASE) {
+        if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_RELEASE) 
+        {
 
         }
 
         //rotates anticlockwise about negative x axis 
-        if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_RELEASE) {
+        if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_RELEASE) 
+        {
 
         }
 
         //rotates anti clockwise about positive y axis 
-        if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_RELEASE) {
+        if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_RELEASE) 
+        {
+
 
         }
 
         //rotates anti clockwise about negative y axis
-        if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_RELEASE) {
+        if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_RELEASE) 
+        {
 
         }
 
 
         //changes render mode to points
-        if (glfwGetKey(window, GLFW_KEY_P) == GLFW_RELEASE) {
+        if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) 
+        {
 
             renderMode = GL_POINTS;
 
         }
 
         //changes render mode to lines
-        if (glfwGetKey(window, GLFW_KEY_L) == GLFW_RELEASE) {
+        if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS) 
+        {
             renderMode = GL_LINES;
         }
 
         //changes render mode to triangles
-        if (glfwGetKey(window, GLFW_KEY_T) == GLFW_RELEASE) {
+        if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS) 
+        {
             renderMode = GL_TRIANGLES;
         }
 
@@ -816,7 +862,8 @@ int main(int argc, char* argv[])
         const float cameraAngularSpeed = 60.0f;
 
         //while right clicked, pan
-        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS) {
+        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS) 
+        {
             glfwGetCursorPos(window, &mousePosX, &mousePosY);
             double dx = mousePosX - lastMousePosX;     
             lastMousePosX = mousePosX;
@@ -825,7 +872,8 @@ int main(int argc, char* argv[])
         }
 
         //while middle clicked, tilt
-        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_3) == GLFW_PRESS) {
+        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_3) == GLFW_PRESS) 
+        {
             glfwGetCursorPos(window, &mousePosX, &mousePosY);
             double dy = mousePosY - lastMousePosY;
             lastMousePosY = mousePosY;
@@ -833,7 +881,8 @@ int main(int argc, char* argv[])
             glfwGetCursorPos(window, &lastMousePosX, &lastMousePosY);
         }
         //while left clicked zoom
-        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS) {
+        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS) 
+        {
             glfwGetCursorPos(window, &mousePosX, &mousePosY);
             float dz = mousePosY - lastMousePosY;
             lastMousePosY = mousePosY;
@@ -857,7 +906,9 @@ int main(int argc, char* argv[])
         GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
         glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
 
-       
+       // End Frame
+        glfwSwapBuffers(window);
+        glfwPollEvents();
 
     }
 
