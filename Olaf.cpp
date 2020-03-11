@@ -20,15 +20,15 @@ using namespace std;
 
 const char* getVertexShaderSource()
 {
-    
+
     return
         "#version 330 core\n"
         "layout (location = 0) in vec3 aPos;"
         "layout (location = 1) in vec3 aColor;"
         ""
         "uniform mat4 worldMatrix;"
-        "uniform mat4 viewMatrix;"  
-        "uniform mat4 projectionMatrix;"  
+        "uniform mat4 viewMatrix;"
+        "uniform mat4 projectionMatrix;"
         ""
         "out vec4 vertexColor;"//passed vec4 instead because  theres no good reason to convert later
         "void main()"
@@ -55,7 +55,7 @@ int compileAndLinkShaders()
 {
     // compile and link shader program
     // return shader program id
-    
+
     // gimme dat vertex shader
     int vertexShader = glCreateShader(GL_VERTEX_SHADER);
     const char* vertexShaderSource = getVertexShaderSource();
@@ -105,7 +105,7 @@ int compileAndLinkShaders()
     return shaderProgram;
 }
 
-void buildGrid(GLuint worldMatrixLocation) 
+void buildGrid(GLuint worldMatrixLocation)
 { //uses the world matrix location and a for loop to construct the x/z grid for the ground 
     //draw x 
     for (float i = -50; i <= 50; i++)
@@ -207,6 +207,7 @@ void doYouWantToBuildASnowman(GLuint worldMatrixLocation, GLenum renderMode, flo
     olafRLeg(worldMatrixLocation, renderMode, transFloat, scaleMat, xFloat, zFloat);
     olafLLeg(worldMatrixLocation, renderMode, transFloat, scaleMat, xFloat, zFloat);
 }
+ //all the create functions
 
 int createVertexBufferObject()
 {
@@ -259,7 +260,7 @@ int createVertexBufferObject()
         vec3(0.5f, 0.5f, 0.5f), vec3(1.0f, 1.0f, 1.0f),
         vec3(-0.5f, 0.5f,-0.5f), vec3(1.0f, 1.0f, 1.0f),
         vec3(-0.5f, 0.5f, 0.5f), vec3(1.0f, 1.0f, 1.0f),
-        //NEW CUBE GREEN COLOR 36-71
+        //new cube green color 36-71
         vec3(-0.5f,-0.5f,-0.5f), vec3(0.0f, 1.0f, 0.0f), //left 36
         vec3(-0.5f,-0.5f, 0.5f),  vec3(0.0f, 1.0f, 0.0f),
         vec3(-0.5f, 0.5f, 0.5f),  vec3(0.0f, 1.0f, 0.0f),
@@ -307,248 +308,248 @@ int createVertexBufferObject()
         vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 1.0f, 0.0f),
         vec3(-0.5f, 0.5f,-0.5f), vec3(0.0f, 1.0f, 0.0f),
         vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 1.0f, 0.0f),
-          // new cube red color 72-107
-        vec3(-0.5f,-0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f), //left -72
-        vec3(-0.5f,-0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
-        vec3(-0.5f, 0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
+        // new cube red color 72-107
+      vec3(-0.5f,-0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f), //left -72
+      vec3(-0.5f,-0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
 
-        vec3(-0.5f,-0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
-        vec3(-0.5f, 0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
-        vec3(-0.5f, 0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(-0.5f,-0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
 
-        vec3(0.5f, 0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f), // far 78
-        vec3(-0.5f,-0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
-        vec3(-0.5f, 0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(0.5f, 0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f), // far 78
+      vec3(-0.5f,-0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
 
-        vec3(0.5f, 0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
-        vec3(0.5f,-0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
-        vec3(-0.5f,-0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(0.5f, 0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(0.5f,-0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(-0.5f,-0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
 
-        vec3(0.5f,-0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f), // bottom 84
-        vec3(-0.5f,-0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
-        vec3(0.5f,-0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(0.5f,-0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f), // bottom 84
+      vec3(-0.5f,-0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(0.5f,-0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
 
-        vec3(0.5f,-0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
-        vec3(-0.5f,-0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
-        vec3(-0.5f,-0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(0.5f,-0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(-0.5f,-0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(-0.5f,-0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
 
-        vec3(-0.5f, 0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f), // near 90
-        vec3(-0.5f,-0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
-        vec3(0.5f,-0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f), // near 90
+      vec3(-0.5f,-0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(0.5f,-0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
 
-        vec3(0.5f, 0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
-        vec3(-0.5f, 0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
-        vec3(0.5f,-0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(0.5f, 0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(0.5f,-0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
 
-        vec3(0.5f, 0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f), // right 96
-        vec3(0.5f,-0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
-        vec3(0.5f, 0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(0.5f, 0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f), // right 96
+      vec3(0.5f,-0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(0.5f, 0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
 
-        vec3(0.5f,-0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
-        vec3(0.5f, 0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
-        vec3(0.5f,-0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(0.5f,-0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(0.5f, 0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(0.5f,-0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
 
-        vec3(0.5f, 0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f), // top 102
-        vec3(0.5f, 0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
-        vec3(-0.5f, 0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(0.5f, 0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f), // top 102
+      vec3(0.5f, 0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
 
-        vec3(0.5f, 0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
-        vec3(-0.5f, 0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
-        vec3(-0.5f, 0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
-        //blue cube
-        vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f), //left -108
-        vec3(-0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
-        vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(0.5f, 0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f,-0.5f), vec3(1.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
+      //blue cube
+      vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f), //left -108
+      vec3(-0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
 
-        vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
-        vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
-        vec3(-0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(-0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
 
-        vec3(0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f), // far 114
-        vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
-        vec3(-0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f), // far 114
+      vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(-0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
 
-        vec3(0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
-        vec3(0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
-        vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
 
-        vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f), // bottom 120
-        vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
-        vec3(0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f), // bottom 120
+      vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
 
-        vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
-        vec3(-0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
-        vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(-0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
 
-        vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f), // near 126
-        vec3(-0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
-        vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f), // near 126
+      vec3(-0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
 
-        vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
-        vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
-        vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
 
-        vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f), // right 132
-        vec3(0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
-        vec3(0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f), // right 132
+      vec3(0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
 
-        vec3(0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
-        vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
-        vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
 
-        vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f), // top 138
-        vec3(0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
-        vec3(-0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f), // top 138
+      vec3(0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(-0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
 
-        vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
-        vec3(-0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
-        vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
-        //black cube
-        vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f), //left -144
-        vec3(-0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(-0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 1.0f),
+      vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 1.0f),
+      //black cube
+      vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f), //left -144
+      vec3(-0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
 
-        vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(-0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
 
-        vec3(0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f), // far 150
-        vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(-0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f), // far 150
+      vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
 
-        vec3(0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
 
-        vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f), // bottom 156
-        vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f), // bottom 156
+      vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
 
-        vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(-0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(-0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
 
-        vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f), // near 162
-        vec3(-0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f), // near 162
+      vec3(-0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
 
-        vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
 
-        vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f), // right 168
-        vec3(0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f), // right 168
+      vec3(0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
 
-        vec3(0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
 
-        vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f), // top 174
-        vec3(0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(-0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f), // top 174
+      vec3(0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
 
-        vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(-0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
-        //orange cubarino
-        vec3(-0.5f, -0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f), //left -180
-        vec3(-0.5f, -0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
-        vec3(-0.5f, 0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      //orange cubarino
+      vec3(-0.5f, -0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f), //left -180
+      vec3(-0.5f, -0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(-0.5f, 0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
 
-        vec3(-0.5f, -0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
-        vec3(-0.5f, 0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
-        vec3(-0.5f, 0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(-0.5f, -0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(-0.5f, 0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(-0.5f, 0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
 
-        vec3(0.5f, 0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f), // far 186
-        vec3(-0.5f, -0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
-        vec3(-0.5f, 0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(0.5f, 0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f), // far 186
+      vec3(-0.5f, -0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(-0.5f, 0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
 
-        vec3(0.5f, 0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
-        vec3(0.5f, -0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
-        vec3(-0.5f, -0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(0.5f, 0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(0.5f, -0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(-0.5f, -0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
 
-        vec3(0.5f, -0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f), // bottom 192
-        vec3(-0.5f, -0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
-        vec3(0.5f, -0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(0.5f, -0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f), // bottom 192
+      vec3(-0.5f, -0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(0.5f, -0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
 
-        vec3(0.5f, -0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
-        vec3(-0.5f, -0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
-        vec3(-0.5f, -0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(0.5f, -0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(-0.5f, -0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(-0.5f, -0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
 
-        vec3(-0.5f, 0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f), // near 198
-        vec3(-0.5f, -0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
-        vec3(0.5f, -0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(-0.5f, 0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f), // near 198
+      vec3(-0.5f, -0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(0.5f, -0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
 
-        vec3(0.5f, 0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
-        vec3(-0.5f, 0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
-        vec3(0.5f, -0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(0.5f, 0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(-0.5f, 0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(0.5f, -0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
 
-        vec3(0.5f, 0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f), // right 204
-        vec3(0.5f, -0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
-        vec3(0.5f, 0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(0.5f, 0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f), // right 204
+      vec3(0.5f, -0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(0.5f, 0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
 
-        vec3(0.5f, -0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
-        vec3(0.5f, 0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
-        vec3(0.5f, -0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(0.5f, -0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(0.5f, 0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(0.5f, -0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
 
-        vec3(0.5f, 0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f), // top 210
-        vec3(0.5f, 0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
-        vec3(-0.5f, 0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(0.5f, 0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f), // top 210
+      vec3(0.5f, 0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(-0.5f, 0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
 
-        vec3(0.5f, 0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
-        vec3(-0.5f, 0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
-        vec3(-0.5f, 0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
-        //cube of color
-        vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f), //left -216
-        vec3(-0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, 0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(-0.5f, 0.5f, -0.5f), vec3(1.0f, 0.39f, 0.0f),
+      vec3(-0.5f, 0.5f, 0.5f), vec3(1.0f, 0.39f, 0.0f),
+      //cube of color
+      vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f), //left -216
+      vec3(-0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
 
-        vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(-0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
 
-        vec3(0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f), // far 222
-        vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(-0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f), // far 222
+      vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
 
-        vec3(0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
 
-        vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f), // bottom 228
-        vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f), // bottom 228
+      vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
 
-        vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(-0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(-0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(-0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
 
-        vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f), // near 234
-        vec3(-0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f), // near 234
+      vec3(-0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
 
-        vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
 
-        vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f), // right 240
-        vec3(0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f), // right 240
+      vec3(0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
 
-        vec3(0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, -0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, -0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
 
-        vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f), // top 246
-        vec3(0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(-0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f), // top 246
+      vec3(0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
 
-        vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(-0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
-        vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f)
+      vec3(0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f, -0.5f), vec3(0.0f, 0.0f, 0.0f),
+      vec3(-0.5f, 0.5f, 0.5f), vec3(0.0f, 0.0f, 0.0f)
 
-
+          
 
     };
 
@@ -583,7 +584,7 @@ int createVertexBufferObject()
         (void*)sizeof(vec3)      // color is offseted a vec3 (comes after position)
     );
     glEnableVertexAttribArray(1);
-    
+
     glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObject);
     glBindVertexArray(0);
 
@@ -629,14 +630,14 @@ int main(int argc, char* argv[])
 
     // Compile and link shaders here for grid ...
     int shaderProgram = compileAndLinkShaders();
-    
-    
+
+
     glUseProgram(shaderProgram);
-    
+
 
     // Camera parameters 
-    vec3 cameraPosition(15.0f, 15.0f, 10.0f);
-    vec3 cameraLookAt(0.0f, -1.0f, 0.0f);
+    vec3 cameraPosition(5.5f, 5.5f, 2.0f);
+    vec3 cameraLookAt(0.05f, 0.0f,-0.05f);
     vec3 cameraUp(0.0f, 1.0f, 0.0f);
 
     // Other camera parameters
@@ -664,23 +665,25 @@ int main(int argc, char* argv[])
     double lastMousePosX, lastMousePosY;
     glfwGetCursorPos(window, &lastMousePosX, &lastMousePosY);
 
-    glEnable(GL_CULL_FACE|GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE | GL_DEPTH_TEST);
 
-
+    glDepthFunc(GL_LESS);
+    glDepthMask(GL_TRUE);
 
 
 
     //variables here are the defaults to be used with the inputs, also will be the revert 
-    float transFloat = 0; 
+    float transFloat = 0;
     bool olafBool = true;
-    float scaleFloat  = 1.0;
+    float scaleFloat = 1.0;
     float xFloat = 0;
-    float zFloat = 0; 
+    float zFloat = 0;
     GLenum renderMode = GL_TRIANGLES;
-        
-    
 
-    
+
+    mat4 viewMatrix = lookAt(vec3(15.0f, 15.0f, 10.0f), vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f));
+
+
     glBindVertexArray(vao);
 
 
@@ -693,54 +696,59 @@ int main(int argc, char* argv[])
 
 
         //mat used for scaling
-        mat3 scaleMat = mat3(            scaleFloat, 0, 0,
-                                         0, scaleFloat, 0 ,
-                                         0, 0 , scaleFloat);
-        
+        mat3 scaleMat = mat3(scaleFloat, 0, 0,
+            0, scaleFloat, 0,
+            0, 0, scaleFloat);
+
         glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-        mat4 viewMatrix = lookAt(cameraPosition, cameraLookAt, cameraUp);
         GLuint viewMatrixLocation = glGetUniformLocation(shaderProgram, "viewMatrix");
 
-        glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT);
-        
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
         // Draw geometry
         GLuint worldMatrixLocation = glGetUniformLocation(shaderProgram, "worldMatrix");
 
-        
-        
+
+
 
         float theta = radians(cameraHorizontalAngle);
         float phi = radians(cameraVerticalAngle);
 
+
         cameraLookAt = vec3(cosf(phi) * cosf(theta), sinf(phi), -cosf(phi) * sinf(theta));
+        
+        
         //draw gridlines
         buildGrid(worldMatrixLocation);
-       
 
 
- 
+
+
         //draw x axis 
-        
+
         mat4 xAxisWorldMatrix = translate(mat4(1.0f), vec3(2.5f, 0.0f, 0.0)) * scale(mat4(1.0f), vec3(5.0f, 0.0f, 0.0f));
         glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &xAxisWorldMatrix[0][0]);
-        glDrawArrays(GL_LINES, 72, 36); //LET ME JUST RANT ABOUT THIS IT TOOK ME FOUR HOURS TO REALIZE THIS DIDNT GO FROM THE SECOND PARAMETER TO THE THIRD, IT STARTS AT THE SECOND AND GOES ON FOR THE NUMBER THAT THE THIRD IS AdklfhjSD;GLKHJASD;LFGJKHASDLFGJHASDLFGKJHASDLGKJHASDLGKJHASDG
+         //LET ME JUST RANT ABOUT THIS IT TOOK ME FOUR HOURS TO REALIZE THIS DIDNT GO FROM THE SECOND PARAMETER TO THE THIRD, IT STARTS AT THE SECOND AND GOES ON FOR THE NUMBER THAT THE THIRD IS AdklfhjSD;GLKHJASD;LFGJKHASDLFGJHASDLFGKJHASDLGKJHASDLGKJHASDG
+        glDrawArrays(GL_LINES, 72, 36);
+        
+        
         //draw y axis
 
         mat4 yAxisWorldMatrix = translate(mat4(1.0f), vec3(0.0f, 2.5f, 0.0f)) * scale(mat4(1.0f), vec3(0.0f, 5.0f, 0.0f));
         glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &yAxisWorldMatrix[0][0]);
         glDrawArrays(GL_LINES, 36, 36);
-       
-        
+
+
         //draw z axis 
-        mat4 zAxisWorldMatrix = translate(mat4(1.0f), vec3 (0.0f, 0.0f, -2.5f)) * scale(mat4(1.0f), vec3(0.0f, 0.0f, 5.0f));
+        mat4 zAxisWorldMatrix = translate(mat4(1.0f), vec3(0.0f, 0.0f, -2.5f)) * scale(mat4(1.0f), vec3(0.0f, 0.0f, 5.0f));
         glUniformMatrix4fv(worldMatrixLocation, 1, GL_FALSE, &zAxisWorldMatrix[0][0]);
         glDrawArrays(GL_LINES, 108, 36);
-       
+
         //first body draw 
         if (olafBool) {
             doYouWantToBuildASnowman(worldMatrixLocation, renderMode, transFloat, scaleMat, xFloat, zFloat);
-            
+
         }
         //controls olaf from getting too itty bitty 
         if (scaleFloat < .1)
@@ -748,26 +756,26 @@ int main(int argc, char* argv[])
 
         //key inputs will go heyyaaaaaahhh
         if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-                    glfwSetWindowShouldClose(window, true);
+            glfwSetWindowShouldClose(window, true);
 
         //reposition olaf with space, uses random floats to change the matricies 
         if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
         {
             olafBool = false;
             transFloat = -50.0f + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (50.0f - -50.0f)));
-            olafBool = true; 
+            olafBool = true;
         }
-        
+
         //scale olaf upwards with U
-        if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS) 
+        if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
         {
             olafBool = false;
             scaleFloat += .11f;
-            olafBool = true; 
+            olafBool = true;
         }
 
         //scale olaf downwards with J 
-        if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS) 
+        if (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS)
         {
             olafBool = false;
             scaleFloat -= .11f;
@@ -775,7 +783,7 @@ int main(int argc, char* argv[])
         }
 
         //move olaf left
-        if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) 
+        if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
         {
             olafBool = false;
             zFloat += .5;
@@ -784,19 +792,19 @@ int main(int argc, char* argv[])
 
 
         //move olaf right
-        if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) 
+        if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         {
-            
+
             olafBool = false;
             zFloat -= .5;
             olafBool = true;
-        
+
         }
 
 
 
         //move olaf up
-        if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) 
+        if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         {
             olafBool = false;
             xFloat -= .5;
@@ -804,7 +812,7 @@ int main(int argc, char* argv[])
         }
 
         //move olaf down
-        if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) 
+        if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
         {
             olafBool = false;
             xFloat += .5;
@@ -812,35 +820,8 @@ int main(int argc, char* argv[])
         }
 
 
-        //rotates anti clockwise about positive x axis 
-        if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) 
-        {
-            
-            cameraHorizontalAngle = theta+ radians(5.0f);
-        }
-
-        //rotates anticlockwise about negative x axis 
-        if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) 
-        {
-
-        }
-
-        //rotates anti clockwise about positive y axis 
-        if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) 
-        {
-
-
-        }
-
-        //rotates anti clockwise about negative y axis
-        if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) 
-        {
-
-        }
-
-
         //changes render mode to points
-        if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) 
+        if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
         {
 
             renderMode = GL_POINTS;
@@ -848,13 +829,13 @@ int main(int argc, char* argv[])
         }
 
         //changes render mode to lines
-        if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS) 
+        if (glfwGetKey(window, GLFW_KEY_L) == GLFW_PRESS)
         {
             renderMode = GL_LINES;
         }
 
         //changes render mode to triangles
-        if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS) 
+        if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
         {
             renderMode = GL_TRIANGLES;
         }
@@ -869,17 +850,17 @@ int main(int argc, char* argv[])
         const float cameraAngularSpeed = 60.0f;
 
         //while right clicked, pan
-        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS) 
+        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_2) == GLFW_PRESS)
         {
             glfwGetCursorPos(window, &mousePosX, &mousePosY);
-            double dx = mousePosX - lastMousePosX;     
+            double dx = mousePosX - lastMousePosX;
             lastMousePosX = mousePosX;
             cameraHorizontalAngle -= dx * cameraAngularSpeed * dt;
             glfwGetCursorPos(window, &lastMousePosX, &lastMousePosY);
         }
 
         //while middle clicked, tilt
-        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_3) == GLFW_PRESS) 
+        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_3) == GLFW_PRESS)
         {
             glfwGetCursorPos(window, &mousePosX, &mousePosY);
             double dy = mousePosY - lastMousePosY;
@@ -888,13 +869,13 @@ int main(int argc, char* argv[])
             glfwGetCursorPos(window, &lastMousePosX, &lastMousePosY);
         }
         //while left clicked zoom
-        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS) 
+        if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS)
         {
             glfwGetCursorPos(window, &mousePosX, &mousePosY);
             float dz = mousePosY - lastMousePosY;
             lastMousePosY = mousePosY;
             cameraPosition -= cameraLookAt * dz * dt * cameraFastSpeed;
-            
+
         }
 
         //added a reset function because why would you want to lose poor olaf
@@ -910,21 +891,50 @@ int main(int argc, char* argv[])
             olafBool = true;
         }
 
-        //float theta = radians(cameraHorizontalAngle);
-        //float phi = radians(cameraVerticalAngle);
 
+        // Rotate world orientation counterclockwise from +x axis
+        if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
+            viewMatrix = rotate(viewMatrix, radians(1.0f), vec3(1.0f, 0.0f, 0.0f));
+            GLuint worldOrientation = glGetUniformLocation(shaderProgram, "viewMatrix");
+            glUniformMatrix4fv(worldOrientation, 1, GL_FALSE, &viewMatrix[0][0]);
+        }
+
+        // Rotate world orientation counterclockwise from -x axis
+        if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
+            viewMatrix = rotate(viewMatrix, radians(-1.0f), vec3(1.0f, 0.0f, 0.0f));
+            GLuint worldOrientation = glGetUniformLocation(shaderProgram, "viewMatrix");
+            glUniformMatrix4fv(worldOrientation, 1, GL_FALSE, &viewMatrix[0][0]);
+        }
+
+        // Rotate world orientation counterclockwise from +y axis
+        if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
+            viewMatrix = rotate(viewMatrix, radians(1.0f), vec3(0.0f, 1.0f, 0.0f));
+            GLuint worldOrientation = glGetUniformLocation(shaderProgram, "viewMatrix");
+            glUniformMatrix4fv(worldOrientation, 1, GL_FALSE, &viewMatrix[0][0]);
+        }
+
+        // Rotate world orientation counterclockwise from -y axis
+        if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
+            viewMatrix = rotate(viewMatrix, radians(-1.0f), vec3(0.0f, 1.0f, 0.0f));
+            GLuint worldOrientation = glGetUniformLocation(shaderProgram, "viewMatrix");
+            glUniformMatrix4fv(worldOrientation, 1, GL_FALSE, &viewMatrix[0][0]);
+        }
+
+        if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS) {
+            viewMatrix = mat4(1.0f);
+            GLuint worldOrientation = glGetUniformLocation(shaderProgram, "viewMatrix");
+            glUniformMatrix4fv(worldOrientation, 1, GL_FALSE, &viewMatrix[0][0]);
+        }
+
+        // This line breaks the entire code. Don't know why. If i comment it out, rotating works, but i lose camera control
         
-        //vec3 cameraSideVector = glm::cross(cameraLookAt, vec3(0.0f, 1.0f, 0.0f));
-
-       // glm::normalize(cameraSideVector);
-
-        // Set the view matrix 
-        viewMatrix = lookAt(cameraPosition, cameraPosition + cameraLookAt, cameraUp);
-
+                viewMatrix = lookAt(cameraPosition, cameraPosition + cameraLookAt, cameraUp);
         
+
+
         glUniformMatrix4fv(viewMatrixLocation, 1, GL_FALSE, &viewMatrix[0][0]);
 
-       // End Frame
+        // End Frame
         glfwSwapBuffers(window);
         glfwPollEvents();
 

@@ -249,8 +249,8 @@
     <Image Include="..\Assets\Textures\Particle.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Source\Assignment1.cpp" />
     <ClCompile Include="..\ThirdParty\glm\glm\detail\glm.cpp" />
-    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\ThirdParty\glew-2.1.0\include\GL\eglew.h" />
